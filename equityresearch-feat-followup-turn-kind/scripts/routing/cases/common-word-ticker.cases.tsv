@@ -1,0 +1,140 @@
+# LLM/settings: temperature 0, empty conversation history, run via classify-file.ts.
+#   default LOCAL qwen/qwen3.6-35b-a3b @ :1234 (max_tokens 1200, timeout 180s);
+#   DEEPSEEK=1 LOG_LEVEL=error → prod deepseek-chat (max_tokens 600, timeout 15s).
+# Layer B · category 1 — common word that IS a company, in a financial context.
+# The word is the SUBJECT of a lens (or a company in a comparison) → its ticker.
+# Negatives (same word as a normal word) live in non-market-homograph.cases.tsv;
+# the price-target concept trap lives in concept-vs-company.cases.tsv.
+# Run: npx tsx scripts/routing/classify-file.ts scripts/routing/cases/common-word-ticker.cases.tsv
+#
+# Note legend (from the 2026-06-19 local-35b ×2 run; verify on DeepSeek before
+# acting): "35b→X ... DeepSeek ✓" = a 35b-only model gap, NOT a prompt bug — do
+# NOT tune the prompt for it. "PROD GAP" = a real miss on DeepSeek too (open list).
+
+# Target / TGT  (folded from verify-ambiguous-ticker)
+target past performance	TGT,=PERFORMANCE	headline regression
+Target stock price	TGT,=STOCK_PRICE	35b→RATING (ticker ok, primary quirk); DeepSeek ✓ STOCK_PRICE
+target stock	TGT	35b→GENERAL (miss); DeepSeek ✓ [TGT]
+Target earnings	TGT,=EARNINGS
+Target news	TGT,=NEWS
+Target same store sales	TGT
+compare Target and Walmart revenue	TGT,WMT	multi-company; TGT not dropped
+
+# Arm / Hood  (folded from verify)
+ARM and Nvidia earnings	ARM,NVDA,=EARNINGS
+Hood earning call	HOOD,=EARNINGS
+should i buy arm stock	ARM
+
+# Block → XYZ  (BLOCK=XYZ live as of 2026-06-19; SQ is the dead pre-rename ticker.
+# DeepSeek resolves XYZ via the alias; local qwen 9b/35b may misroute — model-only)
+Block stock news	XYZ,=NEWS
+Block earnings	XYZ,=EARNINGS
+why did Block fall today	XYZ
+Square earnings	XYZ,=EARNINGS
+Square stock price	XYZ,=STOCK_PRICE
+Block Cash App revenue	XYZ
+$SQ news	SQ|XYZ,=NEWS	literal old cashtag; SQ→XYZ remap is a separate normalize-layer concern
+
+# Visa / V
+Visa stock	V
+Visa earnings	V,=EARNINGS
+Visa revenue growth	V,=PERFORMANCE
+V stock price	V,=STOCK_PRICE
+$V news	V,=NEWS
+Visa card volume	V
+
+# Delta / DAL
+Delta stock	DAL
+Delta earnings	DAL,=EARNINGS
+Delta airline revenue	DAL,=PERFORMANCE
+$DAL stock	DAL
+Delta flight cancellations	DAL,=NEWS	airline operational news → DAL/NEWS; 35b→GENERAL (miss)
+
+# Snowflake / SNOW
+Snowflake stock	SNOW
+Snowflake earnings	SNOW,=EARNINGS
+Snowflake revenue growth	SNOW,=PERFORMANCE
+SNOW stock news	SNOW,=NEWS
+$SNOW earnings	SNOW,=EARNINGS
+why did Snowflake fall	SNOW
+
+# Oracle / ORCL
+Oracle stock	ORCL
+Oracle earnings	ORCL,=EARNINGS
+Oracle cloud revenue	ORCL,=PERFORMANCE
+ORCL stock price	ORCL,=STOCK_PRICE
+why did Oracle jump	ORCL
+
+# Apple / AAPL
+Apple stock	AAPL
+Apple earnings	AAPL,=EARNINGS
+AAPL news	AAPL,=NEWS
+$AAPL	AAPL
+why did Apple fall today	AAPL
+Apple vs Microsoft valuation	AAPL,MSFT,=VALUATION
+
+# Meta / META
+Meta stock	META
+Meta earnings	META,=EARNINGS
+META stock news	META,=NEWS
+$META	META
+why did Meta fall	META
+
+# Amazon / AMZN
+Amazon stock	AMZN
+Amazon earnings	AMZN,=EARNINGS
+AMZN news	AMZN,=NEWS
+$AMZN	AMZN
+
+# Unity / U
+Unity stock	U
+Unity earnings	U,=EARNINGS
+U stock price	U,=STOCK_PRICE	35b→[UBER] WRONG company; DeepSeek ✓ [U]
+$U earnings	U,=EARNINGS
+why did Unity fall	U
+
+# ServiceNow / NOW
+ServiceNow stock	NOW
+NOW earnings	NOW,=EARNINGS
+$NOW stock	NOW
+ServiceNow AI revenue	NOW,=PERFORMANCE
+
+# ICE = Intercontinental Exchange  (the immigration/frozen-water negatives are in non-market-homograph)
+ICE stock	ICE
+ICE earnings	ICE,=EARNINGS
+$ICE stock	ICE
+Intercontinental Exchange revenue	ICE,=PERFORMANCE
+ICE exchange data revenue	ICE
+ICE valuation	ICE,=VALUATION
+
+# Shell / SHEL
+Shell stock	SHEL
+Shell earnings	SHEL,=EARNINGS
+SHEL dividend	SHEL
+$SHEL	SHEL
+shell gas station revenue	SHEL
+Shell LNG results	SHEL,=EARNINGS
+
+# Zoom / ZM
+Zoom stock	ZM
+Zoom earnings	ZM,=EARNINGS
+ZM stock price	ZM,=STOCK_PRICE
+$ZM earnings	ZM,=EARNINGS
+Zoom enterprise revenue	ZM,=PERFORMANCE
+why did Zoom fall	ZM
+
+# Box / BOX
+Box stock	BOX
+Box earnings	BOX,=EARNINGS	35b→[BOXN] fake ticker; DeepSeek ✓ [BOX]
+BOX stock news	BOX,=NEWS
+$BOX	BOX
+Box cloud revenue	BOX,=PERFORMANCE
+why did Box fall	BOX
+
+# Workday / WDAY
+Workday stock	WDAY
+Workday earnings	WDAY,=EARNINGS
+WDAY stock price	WDAY,=STOCK_PRICE
+$WDAY earnings	WDAY,=EARNINGS
+Workday HR software revenue	WDAY,=PERFORMANCE
+why did Workday fall	WDAY

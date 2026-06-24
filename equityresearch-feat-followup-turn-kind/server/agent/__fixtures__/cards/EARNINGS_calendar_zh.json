@@ -1,0 +1,235 @@
+{
+  "dataSource": "EARNINGS",
+  "language": "zh",
+  "apiData": {
+    "success": true,
+    "topic": "calendar",
+    "date": "2026-06-17",
+    "source": "nasdaq",
+    "calendar": {
+      "asOf": "Wed, Jun 17, 2026",
+      "headers": {
+        "time": "Time",
+        "symbol": "Symbol",
+        "name": "Company Name",
+        "marketCap": "Market Cap",
+        "fiscalQuarterEnding": "Fiscal Quarter Ending",
+        "epsForecast": "Consensus EPS* Forecast",
+        "noOfEsts": "# of Ests",
+        "lastYearRptDt": "Last Year's Report Date",
+        "lastYearEPS": "Last year's EPS*"
+      },
+      "rows": [
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "N/A",
+          "time": "time-not-supplied",
+          "symbol": "FER",
+          "name": "Ferrovial N.V.",
+          "marketCap": "$49,290,050,590",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "6/17/2025",
+          "lastYearEPS": "$2.39",
+          "time": "time-pre-market",
+          "symbol": "JBL",
+          "name": "Jabil Inc.",
+          "marketCap": "$40,684,976,122",
+          "fiscalQuarterEnding": "May/2026",
+          "epsForecast": "$2.96",
+          "noOfEsts": "4"
+        },
+        {
+          "lastYearRptDt": "5/07/2025",
+          "lastYearEPS": "$0.36",
+          "time": "time-not-supplied",
+          "symbol": "EC",
+          "name": "Ecopetrol S.A.",
+          "marketCap": "$32,256,046,992",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "$0.60",
+          "noOfEsts": "2"
+        },
+        {
+          "lastYearRptDt": "4/30/2025",
+          "lastYearEPS": "$3.07",
+          "time": "time-not-supplied",
+          "symbol": "ICLR",
+          "name": "ICON plc",
+          "marketCap": "$11,310,525,249",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "$2.18",
+          "noOfEsts": "3"
+        },
+        {
+          "lastYearRptDt": "6/20/2025",
+          "lastYearEPS": "$1.38",
+          "time": "time-pre-market",
+          "symbol": "KMX",
+          "name": "CarMax Inc",
+          "marketCap": "$7,409,074,059",
+          "fiscalQuarterEnding": "May/2026",
+          "epsForecast": "$0.94",
+          "noOfEsts": "6"
+        },
+        {
+          "lastYearRptDt": "6/18/2025",
+          "lastYearEPS": "$1.32",
+          "time": "time-not-supplied",
+          "symbol": "KFY",
+          "name": "Korn Ferry ",
+          "marketCap": "$3,703,181,399",
+          "fiscalQuarterEnding": "Apr/2026",
+          "epsForecast": "$1.37",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "$0.05",
+          "time": "time-after-hours",
+          "symbol": "SB",
+          "name": "Safe Bulkers, Inc",
+          "marketCap": "$696,286,965",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "6/18/2025",
+          "lastYearEPS": "$0.20",
+          "time": "time-after-hours",
+          "symbol": "SWBI",
+          "name": "Smith & Wesson Brands, Inc.",
+          "marketCap": "$638,485,241",
+          "fiscalQuarterEnding": "Apr/2026",
+          "epsForecast": "",
+          "noOfEsts": "N/A"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "$0.06",
+          "time": "time-not-supplied",
+          "symbol": "CSHR",
+          "name": "CoinShares PLC",
+          "marketCap": "$575,879,513",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "5/14/2025",
+          "lastYearEPS": "($0.04)",
+          "time": "time-not-supplied",
+          "symbol": "RR",
+          "name": "Richtech Robotics Inc.",
+          "marketCap": "$478,495,382",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "($0.03)",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "$0.03",
+          "time": "time-not-supplied",
+          "symbol": "AFJK",
+          "name": "Aimei Health Technology Co., Ltd",
+          "marketCap": "$210,000,000",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "$0.24",
+          "time": "time-not-supplied",
+          "symbol": "CAAS",
+          "name": "China Automotive Systems, Inc.",
+          "marketCap": "$136,974,987",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "6/18/2025",
+          "lastYearEPS": "($0.30)",
+          "time": "time-not-supplied",
+          "symbol": "LVO",
+          "name": "LiveOne, Inc.",
+          "marketCap": "$81,366,308",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "($0.31)",
+          "noOfEsts": "2"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "N/A",
+          "time": "time-not-supplied",
+          "symbol": "DSWL",
+          "name": "Deswell Industries, Inc.",
+          "marketCap": "$52,267,584",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "5/07/2025",
+          "lastYearEPS": "($3.45)",
+          "time": "time-not-supplied",
+          "symbol": "LPSN",
+          "name": "LivePerson, Inc.",
+          "marketCap": "$24,717,335",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "($1.02)",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "($1.40)",
+          "time": "time-not-supplied",
+          "symbol": "SEGG",
+          "name": "Sports Entertainment Gaming Global Corporation ",
+          "marketCap": "$15,551,440",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "($0.24)",
+          "time": "time-not-supplied",
+          "symbol": "DTSS",
+          "name": "Datasea Intelligent Technology Ltd.",
+          "marketCap": "$8,148,779",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "($99.99)",
+          "time": "time-not-supplied",
+          "symbol": "LRHC",
+          "name": "La Rosa Holdings Corp.",
+          "marketCap": "$1,729,207",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        },
+        {
+          "lastYearRptDt": "N/A",
+          "lastYearEPS": "($0.62)",
+          "time": "time-not-supplied",
+          "symbol": "BTTC",
+          "name": "Black Titan Corp",
+          "marketCap": "$1,132,561",
+          "fiscalQuarterEnding": "Mar/2026",
+          "epsForecast": "",
+          "noOfEsts": "1"
+        }
+      ]
+    }
+  }
+}

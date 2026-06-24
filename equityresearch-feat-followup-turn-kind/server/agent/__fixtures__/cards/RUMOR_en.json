@@ -1,0 +1,15 @@
+{
+  "dataSource": "RUMOR",
+  "language": "en",
+  "_synthetic": "Hand-built — rumor-check upstream (:3000) not reachable locally. Uses the flat fallback fields formatRumorCard reads when report.markdown/_analysis are absent.",
+  "apiData": {
+    "rumor": "Qualcomm is going to acquire Intel",
+    "label": "Unverified",
+    "confidence": "Low",
+    "summary": "No primary-source confirmation found. Reporting traces to a single speculative social-media post; neither company has issued a statement.",
+    "sources": [
+      "https://www.reuters.com/technology/example-qcom-intc",
+      "https://www.bloomberg.com/news/example-deal-talk"
+    ]
+  }
+}

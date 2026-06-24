@@ -1,0 +1,23 @@
+# LLM/settings: temperature 0, empty conversation history, run via classify-file.ts.
+#   default LOCAL qwen/qwen3.6-35b-a3b @ :1234 (max_tokens 1200, timeout 180s);
+#   DEEPSEEK=1 LOG_LEVEL=error → prod deepseek-chat (max_tokens 600, timeout 15s).
+# Layer B · category 7 — market index/ETF vs the exchange operator's stock.
+# "Nasdaq" usually means the INDEX (most users) — must NOT default to NDAQ
+# (Nasdaq, Inc.). Only an explicit company/exchange-operator framing → NDAQ.
+# Run: npx tsx scripts/routing/classify-file.ts scripts/routing/cases/index-vs-company.cases.tsv
+
+# the exchange operator (company) → NDAQ
+Nasdaq Inc earnings	NDAQ,=EARNINGS
+NDAQ stock price	NDAQ,=STOCK_PRICE
+$NDAQ earnings	NDAQ,=EARNINGS
+Nasdaq exchange revenue	NDAQ,=PERFORMANCE
+
+# the index / ETF → NOT NDAQ
+Nasdaq Composite today	-NDAQ	INDEX
+Nasdaq fell today	-NDAQ	INDEX / market
+Nasdaq 100 performance	-NDAQ	INDEX
+QQQ vs Nasdaq	-NDAQ	ETF vs index
+
+# genuinely ambiguous
+Nasdaq stock	?	指数 or NDAQ
+why did Nasdaq stock fall	?

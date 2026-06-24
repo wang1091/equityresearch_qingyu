@@ -1,0 +1,87 @@
+{
+  "dataSource": "EARNINGS",
+  "language": "en",
+  "apiData": {
+    "success": true,
+    "ticker": "NVDA",
+    "year": 2027,
+    "quarter": 1,
+    "topic": "qa",
+    "data": {
+      "ticker": "NVDA",
+      "fiscal_year": 2027,
+      "fiscal_quarter": 1,
+      "doc_type": "qa",
+      "lang": "en",
+      "model": "deepseek-chat",
+      "generated_at": "2026-05-20T23:26:52.533080Z",
+      "items": [
+        {
+          "index": 1,
+          "analyst": "Joseph Moore",
+          "firm": "Morgan Stanley",
+          "question": "What drove the change in segmentation? What is the philosophy behind giving the numbers that way? Can you discuss competitive differences between the two segments and the surprising CPU number? How do you see that across the two segments?",
+          "response": "The segmentation helps understand the diverse AI business. AI is diverse in languages, applications (enterprise, energy, manufacturing), where it runs (hyperscale cloud, AI natives, enterprises, edge), and how it is governed (public cloud, regulatory, confidential computing). NVIDIA builds all technology components in an extreme codesign, full stack way, but opens the platform for integration. The three large segments are: hyperscale clouds (accelerating data processing, machine learning, and bringing ecosystem business), AI natives/enterprise/industrial/sovereign AI (growing fast as everyone needs AI and NVIDIA provides the entire solution), and the robotic edge (personal AI like self-driving cars and robotic systems). Each segment has different stacks, operating systems, and go-to-market strategies. Hyperscale is easy with 5-6 customers, while the rest of the industry represents about 250,000 companies, requiring diverse AI understanding and a large suite of acceleration libraries.",
+          "sentiment": 9
+        },
+        {
+          "index": 2,
+          "analyst": "Benjamin Reitzes",
+          "firm": "Melius Research",
+          "question": "What is your philosophy on growth? Your data center business ex China grew about 120% in the quarter, and hyperscaler CapEx is forecast to grow 90-100% this year. Do you still see hyperscaler CapEx growing after this year at a very rapid clip? Do you aim to grow faster than hyperscaler CapEx?",
+          "response": "NVIDIA should grow faster than hyperscale CapEx because the data center business has two large parts. The first part is hyperscalers, where CapEx is at a trillion dollars and expected to grow because compute is revenue and profit. The second part includes AI native clouds, regional startups, 250,000 enterprise companies, industrial companies that need on-premise compute, and sovereign AI clouds. This second category is extremely diverse with hundreds to thousands of companies, and NVIDIA is fairly unique in serving it with a vertically integrated platform. NVIDIA is growing share in hyperscalers with new partners like Anthropic, and the second category is poorly understood but growing at an incredible pace.",
+          "sentiment": 9
+        },
+        {
+          "index": 3,
+          "analyst": "Christopher Muse",
+          "firm": "Cantor Fitzgerald",
+          "question": "Vera Rubin is coming soon. How do you see Vera Rubin and extreme co-engineering impacting your share of the inference market as we look into late 2026 and 2027?",
+          "response": "NVIDIA is growing share in inference very quickly. The number of frontier model companies grew this year, including Cursor, Perplexity, TML, and Reflection. NVIDIA added Anthropic as a partner, expanding their capacity across Azure, AWS, CoreWeave, and others. Coverage of Anthropic was largely zero until recently, so NVIDIA is gaining share tremendously fast in inference. VeraRubin will be even more successful than Grace Blackwell. Every frontier model company will jump on VeraRubin from the get-go, which was not true for Blackwell. VeraRubin is off to a tremendous start. For the second category of AI data centers (fragmented, requiring integrated platform), the vast majority of inference is NVIDIA. For physical AI, NVIDIA is practically the only company serving it.",
+          "sentiment": 10
+        },
+        {
+          "index": 4,
+          "analyst": "Timothy Arcuri",
+          "firm": "UBS",
+          "question": "Can you talk about the traction you are getting with custom merchant things like CPX and LPX? You previously mentioned fat synthesis being 20% of the market. How does that fit into your broader platform strategy?",
+          "response": "LPX is designed for low latency and high token rate, but its throughput and context processing ability (e.g., for software coding or agentic workloads) is lower. The use case for LPX is not broad; it is intended for someone with a large portfolio of token services where high token rate is premium. The number of customers is not significant. LPX and other SRAM-based decode-focused accelerators will be a niche product for some time. Grace Blackwell and Vera Rubin support the entire AI lifecycle from data processing to inference. If a provider already has a high token rate service, LPX can be added to deliver that service better. Whether it is 20% or 10% depends on AI development. Today it is less than 20%, but someday premium tokens could be 20%.",
+          "sentiment": 8
+        },
+        {
+          "index": 5,
+          "analyst": "Vivek Arya",
+          "firm": "Bank of America Securities",
+          "question": "There is excitement around CPU for agentic applications and noise about CPUs exceeding GPUs. Is this an incremental workload or cannibalizing GPU? Is the $20 billion number for standalone Vera CPUs or included in Vera Rubin? How to put that in context with CPU as part of GPU?",
+          "response": "The $20 billion is for standalone CPU. Vera is used in four ways: VeraRubin (millions of Rubins connected to Vera), Vera standalone CPU, Vera with CX9 for storage, and Vera with CX9 for security and compute isolation. NVIDIA will be supply constrained throughout the entire life of VeraRubin. For agentic AI, the agent has a harness (e.g., OpenClaw, CodeClaude) that runs on CPU, and tool use (e.g., browsers, compilers) runs on CPUs. The world will have billions of agents using tools like PCs. Agents spin off sub-agents that need inference on GPUs. Orchestration runs on CPUs, thinking on GPUs. Vera was designed as an agentic CPU. The economics of AI is tokens per dollar, not dollars per core. Vera processes tokens as fast as possible. Vera Rubin is the world's first platform with end-to-end confidential computing.",
+          "sentiment": 9
+        },
+        {
+          "index": 6,
+          "analyst": "Stacy Rasgon",
+          "firm": "Bernstein Research",
+          "question": "Where do you put the neo clouds across the two segments? Are they in hyperscale or AI cloud? What is the magnitude? It sounded like you suggested ACIE would grow faster than hyperscale. Is that what you are saying?",
+          "response": "AI native clouds are in the second category (ACIE). They do not build or design chips, cannot assemble unrelated parts into an AI factory, and have low tolerance for time to first token. NVIDIA's architecture is perfect for them because it offers every component, is fully integrated, and is the most rentable computing platform in the world. It is the most performant, easiest to put together, has the best TCO, and is easiest to finance. This segment started growing after hyperscale developed AI first. Hyperscale focused on consumer applications where imperfection is acceptable. For industrial and enterprise applications, AI needed to be very capable and safe. The second category developed slower but represents $50-80 trillion of the world's economy. Both segments will grow incredibly fast, but the second category will grow faster. Within 5 years, physical AI and robotics will grow incredibly fast.",
+          "sentiment": 9
+        },
+        {
+          "index": 7,
+          "analyst": "James Schneider",
+          "firm": "Goldman Sachs",
+          "question": "At GTC, you discussed a trillion dollars visibility into Rubin and Blackwell platform revenue, excluding LPX, Rubin CPX, and Vera CPU racks. Will Vera CPUs be the biggest source of upside above that $1 trillion? Are you contemplating other product combinations to gain greater share of total TAM?",
+          "response": "Incremental above the trillion includes: 1) Continued growing share of frontier AI models, expecting to grow more share. 2) Vera CPU standalone was not included in that number, and it will be the second largest. The TAM is quite large, and agentic systems are exciting for customers. 3) LPX, due to its SRAM architecture, has benefits of low latency and high interactivity but limited throughput and context processing. The combination of Vera, VeraRubin, and LPX will address the entire spectrum of AI from pretraining to inference and agentic systems.",
+          "sentiment": 9
+        },
+        {
+          "index": 8,
+          "analyst": "Joshua Buchalter",
+          "firm": "TD Cowen",
+          "question": "Colette mentioned GB300 is the fastest ramp in company history. How should we think about Vera Rubin against this benchmark? It is a new architecture at the silicon level but similar rack. Should we expect a similar slope or more gradual given new silicon?",
+          "response": "VeraRubin will launch in the second half, starting in Q3. Initial pieces will ramp, and by Q4 it is hard to say what will be faster. Demand is already planned with POs and major customers ready to go. These are complex systems, so timing depends on getting all systems into production. It is early to say, but Q3 start and Q1 of next year will be very big as well.",
+          "sentiment": 8
+        }
+      ],
+      "overall_sentiment": "Positive (avg score: 8.9)"
+    }
+  }
+}

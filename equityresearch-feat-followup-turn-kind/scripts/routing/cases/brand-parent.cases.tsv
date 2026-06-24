@@ -1,0 +1,31 @@
+# LLM/settings: temperature 0, empty conversation history, run via classify-file.ts.
+#   default LOCAL qwen/qwen3.6-35b-a3b @ :1234 (max_tokens 1200, timeout 180s);
+#   DEEPSEEK=1 LOG_LEVEL=error → prod deepseek-chat (max_tokens 600, timeout 15s).
+# Brand / product / segment → parent ticker. Positives + negative guards.
+# Positives (brand + financial lens → parent)
+YouTube ad revenue	GOOGL|GOOG
+Instagram revenue	META
+WhatsApp monetization	META
+Threads user growth	META
+Cash App revenue	XYZ	Block segment; BLOCK=XYZ live (was SQ pre-rename)
+Prime Video subscribers	AMZN
+Twitch revenue	AMZN
+Xbox revenue	MSFT
+GitHub revenue	MSFT
+App Store revenue	AAPL
+Vision Pro sales	AAPL
+Waymo valuation	GOOGL|GOOG
+# Already-working anchors (regression guard — must stay mapped)
+LinkedIn revenue	MSFT
+Azure growth	MSFT
+AWS revenue	AMZN
+Google Cloud growth	GOOGL|GOOG
+Apple iPhone sales	AAPL
+Instagram ad revenue	META
+# Negative guards — brand with NO financial lens must NOT become the parent stock
+Instagram influencer tips	none	生活/产品语境，不是 META 股票
+how to post on Instagram	none
+WhatsApp not working	none	产品故障，不是 META
+YouTube video ideas	none
+delete my Cash App account	none
+Xbox game pass games	none	产品，不是 MSFT

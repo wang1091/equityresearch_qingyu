@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkit Analytics - Equity Research Agent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+        
+        .workflow-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .chat-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .workflow-step.active {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .workflow-step.completed {
+            border-color: #2196F3;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        
+        .workflow-step.active .step-number,
+        .workflow-step.completed .step-number {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+        }
+        
+        .message {
+            margin: 15px 0;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .message.user {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .message.agent {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            margin-right: auto;
+        }
+        
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-area input:focus {
+            border-color: #667eea;
+        }
+        
+        .send-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .analysis-results {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .stock-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .stock-symbol {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        
+        .stock-price {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .metric-value {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .industry-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .industry-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .industry-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏢 Checkit Analytics</h1>
+        <p>AI-Powered Equity Research Analyst</p>
+    </div>
+    
+    <div class="container">
+        <div class="workflow-panel">
+            <h2>🔄 Analysis Workflow</h2>
+            <div id="workflow-steps">
+                <div class="workflow-step" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Initial Query & Industry Selection</div>
+                </div>
+                <div class="workflow-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Search Hot Picks in Industry</div>
+                </div>
+                <div class="workflow-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-title">DCF Valuation Analysis</div>
+                </div>
+                <div class="workflow-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Performance Data Visualization</div>
+                </div>
+                <div class="workflow-step" data-step="5">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Recent Earnings Call Analysis</div>
+                </div>
+                <div class="workflow-step" data-step="6">
+                    <div class="step-number">6</div>
+                    <div class="step-title">Latest News & Sentiment Check</div>
+                </div>
+                <div class="workflow-step" data-step="7">
+                    <div class="step-number">7</div>
+                    <div class="step-title">Valuation Observations</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-panel">
+            <h2>💬 Investment Assistant</h2>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message agent">
+                    <strong>Hello! I'm your AI Equity Research Analyst.</strong><br>
+                    I can help you find the best investment opportunities through comprehensive analysis. 
+                    Try asking questions like "What stock should I invest in?", "Which stocks are undervalued?", 
+                    "Help me find good investment opportunities", or "Compare Apple vs Microsoft" to get started!
+                </div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Ask me about investment opportunities...">
+                <button class="send-button" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        let analysisData = {};
+        let selectedIndustry = '';
+        
+        const industries = [
+            'Technology', 'Healthcare', 'Finance', 'Energy', 'Consumer Goods', 
+            'Industrial', 'Real Estate', 'Utilities', 'Telecommunications', 'Materials',
+            'EV', 'Robotaxi', 'Solar', 'BioTech', 'Mega7', 'Semi-conduct', 'Fintech', 'SaaS', 'AI'
+        ];
+        
+        const sampleStocks = {
+            'Technology': [
+                { symbol: 'AAPL', name: 'Apple Inc.', price: 175.23, pe: 28.5, dcfValue: 190.50, recommendation: 'UNDERVALUED' },
+                { symbol: 'MSFT', name: 'Microsoft Corp.', price: 332.89, pe: 32.1, dcfValue: 345.20, recommendation: 'UNDERVALUED' },
+                { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 134.56, pe: 24.8, dcfValue: 145.30, recommendation: 'UNDERVALUED' }
+            ],
+            'Healthcare': [
+                { symbol: 'JNJ', name: 'Johnson & Johnson', price: 164.78, pe: 22.3, dcfValue: 172.40, recommendation: 'UNDERVALUED' },
+                { symbol: 'PFE', name: 'Pfizer Inc.', price: 42.15, pe: 18.7, dcfValue: 48.60, recommendation: 'UNDERVALUED' },
+                { symbol: 'UNH', name: 'UnitedHealth Group', price: 456.23, pe: 26.4, dcfValue: 475.80, recommendation: 'UNDERVALUED' }
+            ],
+            'Finance': [
+                { symbol: 'JPM', name: 'JPMorgan Chase', price: 142.67, pe: 12.8, dcfValue: 155.90, recommendation: 'UNDERVALUED' },
+                { symbol: 'BAC', name: 'Bank of America', price: 34.89, pe: 11.5, dcfValue: 38.20, recommendation: 'UNDERVALUED' },
+                { symbol: 'WFC', name: 'Wells Fargo', price: 45.12, pe: 13.2, dcfValue: 49.80, recommendation: 'UNDERVALUED' }
+            ],
+            'EV': [
+                { symbol: 'TSLA', name: 'Tesla Inc.', price: 248.56, pe: 45.2, dcfValue: 275.80, recommendation: 'UNDERVALUED' },
+                { symbol: 'RIVN', name: 'Rivian Automotive', price: 12.89, pe: -15.4, dcfValue: 18.50, recommendation: 'UNDERVALUED' },
+                { symbol: 'LCID', name: 'Lucid Group Inc.', price: 3.45, pe: -8.2, dcfValue: 5.60, recommendation: 'UNDERVALUED' }
+            ],
+            'Robotaxi': [
+                { symbol: 'TSLA', name: 'Tesla Inc.', price: 248.56, pe: 45.2, dcfValue: 285.90, recommendation: 'UNDERVALUED' },
+                { symbol: 'GOOGL', name: 'Alphabet Inc. (Waymo)', price: 134.56, pe: 24.8, dcfValue: 155.30, recommendation: 'UNDERVALUED' },
+                { symbol: 'UBER', name: 'Uber Technologies', price: 67.23, pe: 28.5, dcfValue: 78.40, recommendation: 'UNDERVALUED' }
+            ],
+            'Solar': [
+                { symbol: 'ENPH', name: 'Enphase Energy', price: 89.45, pe: 22.1, dcfValue: 105.60, recommendation: 'UNDERVALUED' },
+                { symbol: 'SEDG', name: 'SolarEdge Technologies', price: 34.78, pe: 18.7, dcfValue: 42.30, recommendation: 'UNDERVALUED' },
+                { symbol: 'FSLR', name: 'First Solar Inc.', price: 156.23, pe: 16.9, dcfValue: 175.80, recommendation: 'UNDERVALUED' }
+            ],
+            'BioTech': [
+                { symbol: 'GILD', name: 'Gilead Sciences', price: 78.94, pe: 15.3, dcfValue: 89.60, recommendation: 'UNDERVALUED' },
+                { symbol: 'BIIB', name: 'Biogen Inc.', price: 234.67, pe: 19.8, dcfValue: 265.40, recommendation: 'UNDERVALUED' },
+                { symbol: 'AMGN', name: 'Amgen Inc.', price: 289.45, pe: 16.2, dcfValue: 315.80, recommendation: 'UNDERVALUED' }
+            ],
+            'Mega7': [
+                { symbol: 'AAPL', name: 'Apple Inc.', price: 175.23, pe: 28.5, dcfValue: 195.50, recommendation: 'UNDERVALUED' },
+                { symbol: 'MSFT', name: 'Microsoft Corp.', price: 332.89, pe: 32.1, dcfValue: 365.20, recommendation: 'UNDERVALUED' },
+                { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 134.56, pe: 24.8, dcfValue: 155.30, recommendation: 'UNDERVALUED' },
+                { symbol: 'TSLA', name: 'Tesla Inc.', price: 248.56, pe: 45.2, dcfValue: 285.90, recommendation: 'UNDERVALUED' }
+            ],
+            'Semi-conduct': [
+                { symbol: 'NVDA', name: 'NVIDIA Corp.', price: 445.78, pe: 65.4, dcfValue: 520.30, recommendation: 'UNDERVALUED' },
+                { symbol: 'TSM', name: 'Taiwan Semiconductor', price: 89.23, pe: 18.5, dcfValue: 105.60, recommendation: 'UNDERVALUED' },
+                { symbol: 'AVGO', name: 'Broadcom Inc.', price: 867.45, pe: 24.7, dcfValue: 945.80, recommendation: 'UNDERVALUED' }
+            ],
+            'Fintech': [
+                { symbol: 'PYPL', name: 'PayPal Holdings', price: 67.89, pe: 16.8, dcfValue: 82.40, recommendation: 'UNDERVALUED' },
+                { symbol: 'SQ', name: 'Block Inc.', price: 78.34, pe: 21.5, dcfValue: 92.60, recommendation: 'UNDERVALUED' },
+                { symbol: 'COIN', name: 'Coinbase Global', price: 145.67, pe: 28.9, dcfValue: 175.80, recommendation: 'UNDERVALUED' }
+            ],
+            'SaaS': [
+                { symbol: 'CRM', name: 'Salesforce Inc.', price: 234.56, pe: 42.1, dcfValue: 275.80, recommendation: 'UNDERVALUED' },
+                { symbol: 'SNOW', name: 'Snowflake Inc.', price: 178.23, pe: 85.6, dcfValue: 205.40, recommendation: 'UNDERVALUED' },
+                { symbol: 'PLTR', name: 'Palantir Technologies', price: 23.45, pe: 156.7, dcfValue: 32.60, recommendation: 'UNDERVALUED' }
+            ],
+            'AI': [
+                { symbol: 'NVDA', name: 'NVIDIA Corp.', price: 445.78, pe: 65.4, dcfValue: 520.30, recommendation: 'UNDERVALUED' },
+                { symbol: 'MSFT', name: 'Microsoft Corp.', price: 332.89, pe: 32.1, dcfValue: 365.20, recommendation: 'UNDERVALUED' },
+                { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 134.56, pe: 24.8, dcfValue: 155.30, recommendation: 'UNDERVALUED' },
+                { symbol: 'AMD', name: 'Advanced Micro Devices', price: 156.78, pe: 34.2, dcfValue: 185.60, recommendation: 'UNDERVALUED' }
+            ]
+        };
+        
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                processMessage(message);
+            }
+        }
+        
+        function addMessage(message, sender) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = message;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function updateWorkflowStep(step) {
+            const steps = document.querySelectorAll('.workflow-step');
+            steps.forEach((stepEl, index) => {
+                stepEl.classList.remove('active', 'completed');
+                if (index + 1 === step) {
+                    stepEl.classList.add('active');
+                } else if (index + 1 < step) {
+                    stepEl.classList.add('completed');
+                }
+            });
+            currentStep = step;
+        }
+        
+        function processMessage(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            const investmentTriggers = [
+                'stock', 'invest', 'investment', 'buy', 'purchase', 'portfolio', 
+                'equity', 'share', 'ticker', 'recommend', 'suggestion', 'pick',
+                'opportunity', 'market', 'trading', 'financial', 'money',
+                'capital', 'fund', 'asset', 'security', 'valuation', 'analysis'
+            ];
+            
+            const comparisonTriggers = [
+                'compare', 'comparison', 'vs', 'versus', 'against', 'between',
+                'difference', 'better', 'best', 'which is', 'or', 'alternative',
+                'performance', 'show me', 'analyze'
+            ];
+            
+            const hasInvestmentTrigger = investmentTriggers.some(trigger => lowerMessage.includes(trigger));
+            const hasComparisonTrigger = comparisonTriggers.some(trigger => lowerMessage.includes(trigger));
+            
+            // Debug: Check what triggers are found
+            console.log('Message:', message);
+            console.log('Has investment trigger:', hasInvestmentTrigger);
+            console.log('Has comparison trigger:', hasComparisonTrigger);
+            
+            // Enhanced comparison detection - check for stock symbols and comparison context
+            const hasStockSymbols = /\b[A-Z]{2,5}\b.*\b[A-Z]{2,5}\b/.test(message) || 
+                                   (lowerMessage.includes('apple') && (lowerMessage.includes('microsoft') || lowerMessage.includes('google'))) ||
+                                   (lowerMessage.includes('tesla') && lowerMessage.includes('ford')) ||
+                                   (lowerMessage.includes('nvidia') && lowerMessage.includes('amd')) ||
+                                   (lowerMessage.includes('meta') && lowerMessage.includes('google')) ||
+                                   (lowerMessage.includes('amazon') && lowerMessage.includes('apple'));
+            
+            console.log('Has stock symbols:', hasStockSymbols);
+            
+            // Check for comparison workflow - simplified logic
+            if (hasComparisonTrigger || (hasStockSymbols && hasInvestmentTrigger)) {
+                console.log('Triggering stock comparison');
+                startStockComparison(message);
+            } else if (hasInvestmentTrigger && (
+                lowerMessage.includes('what') || lowerMessage.includes('which') || 
+                lowerMessage.includes('should') || lowerMessage.includes('can') ||
+                lowerMessage.includes('help') || lowerMessage.includes('find') ||
+                lowerMessage.includes('show') || lowerMessage.includes('suggest') ||
+                lowerMessage.includes('recommend') || lowerMessage.includes('research') ||
+                lowerMessage.includes('look')
+            )) {
+                console.log('Triggering full analysis');
+                startAnalysis();
+            } else if (currentStep === 1 && industries.some(ind => lowerMessage.includes(ind.toLowerCase()))) {
+                const industry = industries.find(ind => lowerMessage.includes(ind.toLowerCase()));
+                selectIndustry(industry);
+            } else if (currentStep === 1) {
+                askForIndustry();
+            } else {
+                addMessage(`I can help you with comprehensive equity research and investment analysis. Try asking questions like:<br><br>
+                <strong>📊 Stock Analysis:</strong><br>
+                • "What stock should I invest in?"<br>
+                • "Which stocks are good buys right now?"<br>
+                • "Help me find undervalued stocks"<br>
+                • "Show me the best stocks in tech"<br><br>
+                <strong>🔄 Stock Comparison:</strong><br>
+                • "Compare Apple vs Microsoft"<br>
+                • "Which is better: Tesla or Ford?"<br>
+                • "Analyze NVDA against AMD"<br>
+                • "Show me AAPL vs GOOGL performance"<br><br>
+                I'll guide you through our professional analysis workflow!`, 'agent');
+            }
+        }
+        
+        function startAnalysis() {
+            updateWorkflowStep(1);
+            askForIndustry();
+        }
+        
+        function askForIndustry() {
+            let industryButtons = '<div class="industry-buttons">';
+            industries.forEach(industry => {
+                industryButtons += `<button class="industry-btn" onclick="selectIndustry('${industry}')">${industry}</button>`;
+            });
+            industryButtons += '</div>';
+            
+            addMessage(`<strong>What industry are you interested in?</strong><br>Please select one of the following industries:${industryButtons}`, 'agent');
+        }
+        
+        function selectIndustry(industry) {
+            selectedIndustry = industry;
+            addMessage(`Selected industry: ${industry}`, 'user');
+            updateWorkflowStep(2);
+            
+            setTimeout(() => {
+                addMessage(`<div class="loading"></div> Searching for hot picks in ${industry}...`, 'agent');
+                
+                setTimeout(() => {
+                    searchHotPicks(industry);
+                }, 2000);
+            }, 500);
+        }
+        
+        function searchHotPicks(industry) {
+            updateWorkflowStep(3);
+            const stocks = sampleStocks[industry] || sampleStocks['Technology'];
+            
+            let response = `<strong>📈 Hot Picks in ${industry}:</strong><br>`;
+            response += `Found ${stocks.length} promising stocks. Now analyzing with DCF model...<br><br>`;
+            
+            stocks.forEach(stock => {
+                response += `<div class="stock-card">
+                    <div class="stock-header">
+                        <span class="stock-symbol">${stock.symbol}</span>
+                        <span class="stock-price">$${stock.price}</span>
+                    </div>
+                    <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">${stock.name}</div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-label">Current Price</div>
+                            <div class="metric-value">$${stock.price}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">DCF Value</div>
+                            <div class="metric-value">$${stock.dcfValue}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Upside</div>
+                            <div class="metric-value">${((stock.dcfValue - stock.price) / stock.price * 100).toFixed(1)}%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">${stock.pe}</div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            
+            addMessage(response, 'agent');
+            analysisData.stocks = stocks;
+            
+            setTimeout(() => {
+                continueAnalysis();
+            }, 3000);
+        }
+        
+        function continueAnalysis() {
+            updateWorkflowStep(4);
+            addMessage(`<div class="loading"></div> Analyzing performance data visualization using <a href="https://data-visualization-checkit.streamlit.app/" target="_blank" style="color: #667eea; text-decoration: underline;">Checkit Analytics AI</a>...`, 'agent');
+            
+            setTimeout(() => {
+                updateWorkflowStep(5);
+                addMessage(`✅ <strong>Performance Analysis Complete</strong><br>Using advanced AI analytics from <a href="https://data-visualization-checkit.streamlit.app/" target="_blank" style="color: #667eea; text-decoration: underline;">Checkit Analytics</a>, all stocks show strong technical indicators and positive momentum patterns.`, 'agent');
+                
+                setTimeout(() => {
+                    addMessage(`<div class="loading"></div> Analyzing recent earnings calls for red flags using <a href="https://checkitanalytic.ai/financial-analytics-ai/" target="_blank" style="color: #667eea; text-decoration: underline;">Checkit Analytics AI</a>...`, 'agent');
+                    
+                    setTimeout(() => {
+                        updateWorkflowStep(6);
+                        addMessage(`✅ <strong>Earnings Analysis Complete</strong><br>Through <a href="https://checkitanalytic.ai/financial-analytics-ai/" target="_blank" style="color: #667eea; text-decoration: underline;">Checkit Analytics AI</a> earnings call analysis, no major red flags detected. All companies showed solid fundamentals and positive management guidance.`, 'agent');
+                        
+                        setTimeout(() => {
+                            addMessage(`<div class="loading"></div> Checking latest news and market sentiment...`, 'agent');
+                            
+                            setTimeout(() => {
+                                updateWorkflowStep(7);
+                                provideFinalRecommendation();
+                            }, 2000);
+                        }, 1000);
+                    }, 2000);
+                }, 1000);
+            }, 2000);
+        }
+        
+        function startStockComparison(message) {
+            updateWorkflowStep(3);
+            addMessage(`🔄 <strong>Initiating Stock Comparison Analysis</strong><br>I'll analyze the stocks you mentioned using our Performance Data Visualization and DCF Valuation modules.`, 'agent');
+            
+            const stockSymbols = extractStockSymbols(message);
+            
+            setTimeout(() => {
+                addMessage(`<div class="loading"></div> Running DCF Valuation Analysis using <a href="https://checkit-company-valuation-dcf.streamlit.app/" target="_blank" style="color: #667eea; text-decoration: underline;">Checkit Analytics AI</a>...`, 'agent');
+                
+                setTimeout(() => {
+                    updateWorkflowStep(4);
+                    addMessage(`<div class="loading"></div> Analyzing Performance Data Visualization using <a href="https://data-visualization-checkit.streamlit.app/" target="_blank" style="color: #667eea; text-decoration: underline;">Checkit Analytics AI</a>...`, 'agent');
+                    
+                    setTimeout(() => {
+                        // Complete the analysis without showing comparison table
+                        addMessage(`✅ <strong>Analysis Complete</strong><br>DCF Valuation Analysis and Performance Data Visualization completed using specialized <a href="https://checkit-company-valuation-dcf.streamlit.app/" target="_blank" style="color: #667eea; text-decoration: underline;">DCF</a> and <a href="https://data-visualization-checkit.streamlit.app/" target="_blank" style="color: #667eea; text-decoration: underline;">Data Visualization</a> modules. The analysis has been processed for the requested stocks.`, 'agent');
+                        
+                        // Reset for next analysis
+                        setTimeout(() => {
+                            currentStep = 0;
+                            updateWorkflowStep(0);
+                            addMessage(`<strong>Ready for another analysis?</strong> You can ask me to compare different stocks or find investment opportunities in specific sectors!`, 'agent');
+                        }, 1000);
+                    }, 2500);
+                }, 2000);
+            }, 1000);
+        }
+        
+        function extractStockSymbols(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            const stockMappings = {
+                'apple': { symbol: 'AAPL', name: 'Apple Inc.', price: 175.23, pe: 28.5, dcfValue: 195.50 },
+                'microsoft': { symbol: 'MSFT', name: 'Microsoft Corp.', price: 332.89, pe: 32.1, dcfValue: 365.20 },
+                'google': { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 134.56, pe: 24.8, dcfValue: 155.30 },
+                'alphabet': { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 134.56, pe: 24.8, dcfValue: 155.30 },
+                'tesla': { symbol: 'TSLA', name: 'Tesla Inc.', price: 248.56, pe: 45.2, dcfValue: 285.90 },
+                'nvidia': { symbol: 'NVDA', name: 'NVIDIA Corp.', price: 445.78, pe: 65.4, dcfValue: 520.30 },
+                'amd': { symbol: 'AMD', name: 'Advanced Micro Devices', price: 156.78, pe: 34.2, dcfValue: 185.60 },
+                'ford': { symbol: 'F', name: 'Ford Motor Company', price: 12.45, pe: 8.9, dcfValue: 15.80 },
+                'amazon': { symbol: 'AMZN', name: 'Amazon.com Inc.', price: 142.67, pe: 42.3, dcfValue: 165.90 },
+                'meta': { symbol: 'META', name: 'Meta Platforms Inc.', price: 298.45, pe: 24.1, dcfValue: 335.60 },
+                'facebook': { symbol: 'META', name: 'Meta Platforms Inc.', price: 298.45, pe: 24.1, dcfValue: 335.60 }
+            };
+            
+            const tickerPattern = /\b[A-Z]{1,5}\b/g;
+            const tickers = message.match(tickerPattern) || [];
+            
+            let foundStocks = [];
+            
+            Object.keys(stockMappings).forEach(company => {
+                if (lowerMessage.includes(company)) {
+                    foundStocks.push(stockMappings[company]);
+                }
+            });
+            
+            tickers.forEach(ticker => {
+                if (!foundStocks.some(stock => stock.symbol === ticker)) {
+                    foundStocks.push({
+                        symbol: ticker,
+                        name: `${ticker} Company`,
+                        price: Math.round((Math.random() * 200 + 50) * 100) / 100,
+                        pe: Math.round((Math.random() * 40 + 10) * 10) / 10,
+                        dcfValue: Math.round((Math.random() * 250 + 75) * 100) / 100
+                    });
+                }
+            });
+            
+            if (foundStocks.length === 0) {
+                foundStocks = [
+                    stockMappings['apple'],
+                    stockMappings['microsoft']
+                ];
+            }
+            
+            return foundStocks.slice(0, 4);
+        }
+        
+        function performStockComparison(stocks) {
+            let response = `✅ <strong>Stock Comparison Analysis Complete</strong><br><br>`;
+            response += `<div class="analysis-results">
+                <h3>📊 Apple-to-Apple Performance & Valuation Comparison</h3>`;
+            
+            response += `<div style="overflow-x: auto; margin: 15px 0;">
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <thead style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                        <tr>
+                            <th style="padding: 12px; text-align: left; border-right: 1px solid rgba(255,255,255,0.2);">Stock</th>
+                            <th style="padding: 12px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">Current Price</th>
+                            <th style="padding: 12px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">DCF Value</th>
+                            <th style="padding: 12px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">Upside %</th>
+                            <th style="padding: 12px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">P/E Ratio</th>
+                            <th style="padding: 12px; text-align: center;">Valuation</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+            
+            stocks.forEach((stock, index) => {
+                const upside = ((stock.dcfValue - stock.price) / stock.price * 100).toFixed(1);
+                const isEven = index % 2 === 0;
+                const rowColor = isEven ? '#f8f9fa' : 'white';
+                const valuationColor = parseFloat(upside) > 0 ? '#4CAF50' : '#f44336';
+                const valuation = parseFloat(upside) > 0 ? 'UNDERVALUED' : 'OVERVALUED';
+                
+                response += `
+                    <tr style="background: ${rowColor};">
+                        <td style="padding: 12px; border-right: 1px solid #e0e0e0;">
+                            <strong>${stock.symbol}</strong><br>
+                            <span style="font-size: 0.9rem; color: #666;">${stock.name}</span>
+                        </td>
+                        <td style="padding: 12px; text-align: center; border-right: 1px solid #e0e0e0; font-weight: bold;">${stock.price}</td>
+                        <td style="padding: 12px; text-align: center; border-right: 1px solid #e0e0e0; font-weight: bold; color: #2196F3;">${stock.dcfValue}</td>
+                        <td style="padding: 12px; text-align: center; border-right: 1px solid #e0e0e0; font-weight: bold; color: ${valuationColor};">${upside}%</td>
+                        <td style="padding: 12px; text-align: center; border-right: 1px solid #e0e0e0;">${stock.pe}</td>
+                        <td style="padding: 12px; text-align: center; font-weight: bold; color: ${valuationColor};">${valuation}</td>
+                    </tr>`;
+            });
+            
+            response += `</tbody></table></div>`;
+            
+            const bestStock = stocks.reduce((prev, current) => 
+                ((current.dcfValue - current.price) / current.price) > ((prev.dcfValue - prev.price) / prev.price) ? current : prev
+            );
+            
+            const bestUpside = ((bestStock.dcfValue - bestStock.price) / bestStock.price * 100).toFixed(1);
+            
+            response += `
+                <div style="margin-top: 20px; padding: 15px; background: #f0f8f0; border-radius: 8px; border-left: 4px solid #4CAF50;">
+                    <h4 style="color: #4CAF50; margin: 0 0 10px 0;">🏆 Top Performer: ${bestStock.symbol}</h4>
+                    <p style="margin: 0; color: #333;">
+                        <strong>${bestStock.name}</strong> shows the highest upside potential at <strong>${bestUpside}%</strong> 
+                        with a DCF target of <strong>${bestStock.dcfValue}</strong> vs current price of <strong>${bestStock.price}</strong>.
+                    </p>
+                </div>
+                
+                <div style="margin-top: 15px; padding: 12px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #2196F3;">
+                    <strong>📈 Performance Insights:</strong><br>
+                    • All analysis powered by <a href="https://checkitanalytic.ai/financial-analytics-ai/" target="_blank" style="color: #667eea;">Checkit Analytics AI</a><br>
+                    • DCF valuations based on comprehensive financial modeling<br>
+                    • Performance data includes technical and fundamental analysis<br>
+                    • Real-time market sentiment incorporated
+                </div>
+            </div>`;
+            
+            addMessage(response, 'agent');
+            
+            setTimeout(() => {
+                currentStep = 0;
+                updateWorkflowStep(0);
+                addMessage(`<strong>Ready for another analysis?</strong> You can ask me to compare different stocks or find investment opportunities in specific sectors!`, 'agent');
+            }, 1000);
+        }
+        
+        function provideFinalRecommendation() {
+            const topStock = analysisData.stocks.reduce((prev, current) => 
+                ((current.dcfValue - current.price) / current.price) > ((prev.dcfValue - prev.price) / prev.price) ? current : prev
+            );
+            
+            const response = `<div class="analysis-results">
+                <h3>🎯 Valuation Observations</h3>
+                <div class="stock-card" style="border: 3px solid #4CAF50; background: #f8fff8;">
+                    <div class="stock-header">
+                        <span class="stock-symbol" style="color: #4CAF50;">${topStock.symbol} - TOP OBSERVATION</span>
+                        <span class="stock-price">${topStock.price}</span>
+                    </div>
+                    <div style="font-size: 1rem; color: #333; margin-bottom: 15px;"><strong>${topStock.name}</strong></div>
+                    
+                    <div class="metrics">
+                        <div class="metric" style="background: #e8f5e8;">
+                            <div class="metric-label">Expected Upside</div>
+                            <div class="metric-value" style="color: #4CAF50; font-size: 1.2rem;">${((topStock.dcfValue - topStock.price) / topStock.price * 100).toFixed(1)}%</div>
+                        </div>
+                        <div class="metric" style="background: #e8f5e8;">
+                            <div class="metric-label">DCF Target</div>
+                            <div class="metric-value" style="color: #4CAF50;">${topStock.dcfValue}</div>
+                        </div>
+                        <div class="metric" style="background: #e8f5e8;">
+                            <div class="metric-label">Risk Level</div>
+                            <div class="metric-value" style="color: #4CAF50;">Low</div>
+                        </div>
+                        <div class="metric" style="background: #e8f5e8;">
+                            <div class="metric-label">Valuation</div>
+                            <div class="metric-value" style="color: #4CAF50;">UNDERVALUED</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 15px; padding: 10px; background: #f0f8f0; border-radius: 5px;">
+                        <strong>Key Observations:</strong>
+                        <ul style="margin: 5px 0 0 20px;">
+                            <li>Highest upside potential based on DCF analysis</li>
+                            <li>Strong fundamentals and earnings growth</li>
+                            <li>Positive market sentiment and analyst coverage</li>
+                            <li>No red flags in recent earnings calls</li>
+                            <li>Favorable industry trends in ${selectedIndustry}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <br><strong>Ready for your next analysis?</strong> Ask me about another industry or investment question!`;
+            
+            addMessage(response, 'agent');
+            
+            setTimeout(() => {
+                currentStep = 0;
+                analysisData = {};
+                selectedIndustry = '';
+                updateWorkflowStep(0);
+            }, 1000);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('user-input');
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            input.focus();
+        });
+    </script>
+</body>
+</html>

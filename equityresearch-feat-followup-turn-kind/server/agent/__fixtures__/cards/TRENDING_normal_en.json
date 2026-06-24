@@ -1,0 +1,46 @@
+{
+  "dataSource": "TRENDING",
+  "language": "en",
+  "note": "Normal-state multi-view sample (the sibling TRENDING_en.json is the {success:false} error case). Four coexisting views; changePercent is a raw NUMBER (the '%' is added by simplify, not upstream).",
+  "apiData": {
+    "date": "2026-06-21",
+    "categories": [
+      {
+        "id": "top_gainers",
+        "label": "Top Gainers",
+        "stocks": [
+          { "ticker": "BFLY", "companyName": "Butterfly Network", "price": 4.2, "changePercent": 55.87, "discussion_highlights": ["hot"] },
+          { "ticker": "WOLF", "companyName": "Wolfspeed", "price": 8.1, "changePercent": 17.91 },
+          { "ticker": "QS", "companyName": "QuantumScape", "price": 5.0, "changePercent": 16.52 },
+          { "ticker": "BE", "companyName": "Bloom Energy", "price": 22.4, "changePercent": 9.13 },
+          { "ticker": "OUST", "companyName": "Ouster", "price": 11.7, "changePercent": 6.02 }
+        ]
+      },
+      {
+        "id": "top_losers",
+        "label": "Top Losers",
+        "stocks": [
+          { "ticker": "ACMR", "companyName": "ACM Research", "price": 18.3, "changePercent": -8.44 },
+          { "ticker": "ENTG", "companyName": "Entegris", "price": 95.1, "changePercent": -6.20 },
+          { "ticker": "SMR", "companyName": "NuScale Power", "price": 7.6, "changePercent": -4.10 }
+        ]
+      },
+      {
+        "id": "most_active",
+        "label": "Most Active",
+        "stocks": [
+          { "ticker": "NVDA", "companyName": "NVIDIA", "price": 131.2, "changePercent": 2.31 },
+          { "ticker": "TSLA", "companyName": "Tesla", "price": 248.9, "changePercent": -1.05 }
+        ]
+      },
+      {
+        "id": "most_discussed",
+        "label": "Most Discussed",
+        "stocks": [
+          { "ticker": "AAPL", "companyName": "Apple", "price": 210.4, "changePercent": 0.74, "discussion_highlights": ["new product rumor"] },
+          { "ticker": "GME", "companyName": "GameStop", "price": 28.1, "changePercent": 12.40 }
+        ]
+      }
+    ]
+  }
+}

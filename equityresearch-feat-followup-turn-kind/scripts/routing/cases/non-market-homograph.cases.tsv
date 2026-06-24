@@ -1,0 +1,104 @@
+# LLM/settings: temperature 0, empty conversation history, run via classify-file.ts.
+#   default LOCAL qwen/qwen3.6-35b-a3b @ :1234 (max_tokens 1200, timeout 180s);
+#   DEEPSEEK=1 LOG_LEVEL=error → prod deepseek-chat (max_tokens 600, timeout 15s).
+# Layer B · category 2 — the word is a ticker/company elsewhere, but HERE it is an
+# ordinary word / other domain (immigration, fruit, math, tech-product, ops).
+# Must NOT extract the company ticker. The positive (company) side is in
+# common-word-ticker.cases.tsv.
+# Run: npx tsx scripts/routing/classify-file.ts scripts/routing/cases/non-market-homograph.cases.tsv
+
+# function-word / abstain guards (folded from verify-ambiguous-ticker)
+news on Apple	AAPL,-ON,=NEWS	"ON" must NOT be extracted
+block news recently	-KEY,=NEWS	must not invent a wrong company (KEY)
+car performance	-CAR	"car" is the vehicle, not Avis
+
+# ICE = immigration / customs agency, or frozen water (the ICE-immigration fix)
+ICE immigration news	-ICE,=NEWS|GENERAL	移民署，不是洲际交易所
+ICE raids	-ICE
+ICE deportation policy	-ICE
+ice storm impact	none
+ice cream market	none
+
+# Block — the verb / browser (BLOCK=XYZ live → guard against XYZ, not the dead SQ)
+block this news source	-XYZ
+how to block news popups	-XYZ
+block ads in browser	none
+square root problem	none
+
+# Target — ordinary "target" phrases
+target market size	-TGT	"target market" is a normal phrase
+set target return to 10%	-TGT
+
+# Visa — immigration visa
+visa application fee	none
+student visa requirements	none
+work visa news	-V
+
+# Delta — math / variant / hedging
+delta between revenue and earnings	-DAL
+option delta explained	none
+calculate delta	none
+delta variant news	-DAL
+delta hedging strategy	-DAL
+
+# Snowflake — database / pattern
+snowflake schema design	none
+snowflake pattern in Python	none
+
+# Oracle — database / meaning
+oracle database error	-ORCL
+oracle sql tutorial	none
+oracle meaning	none
+
+# Apple — fruit
+apple fruit price	none
+apple nutrition facts	none
+apple picking near me	none
+
+# Meta — metadata / meta-analysis
+meta analysis paper	none
+metadata schema	none
+meta prompt injection	none
+
+# Alphabet — the actual alphabet
+alphabet order	none
+alphabet song	none
+alphabet letters	none
+
+# Amazon — the river / rainforest
+Amazon river facts	none
+amazon rainforest news	none
+
+# Unity — togetherness / game engine
+unity game engine tutorial	-U
+unity in team	none
+
+# Now — the adverb
+what should I do now	none
+now hiring trends	none
+
+# Shell — script / bash
+shell script error	none
+bash shell command	none
+
+# Zoom — the action / camera
+zoom in image	none
+zoom meeting issue	-ZM
+zoom camera app	none
+
+# Box — plot / cardboard / office
+box plot in Python	none
+cardboard box price	none
+box office revenue	none
+
+# Workday — the day / login
+workday schedule	none
+next workday after holiday	none
+workday login issue	-WDAY
+
+# Misc ordinary-word companies as normal words
+monster movie revenue	none
+celsius to fahrenheit	none
+travelers going to Europe	none
+principal amount of debt	none
+wireless carrier market share	-CARR

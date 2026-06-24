@@ -1,0 +1,28 @@
+{
+  "dataSource": "FDA",
+  "language": "en",
+  "_synthetic": "Hand-built — FDA upstream not reachable locally. Shape mirrors formatFDACard's expected { success, data: { ticker, company, drugs[] } }.",
+  "apiData": {
+    "success": true,
+    "data": {
+      "ticker": "PFE",
+      "company": "Pfizer",
+      "drugs": [
+        {
+          "drug": "Examplemab",
+          "indication": "Non-small cell lung cancer",
+          "date": "2026-03-15",
+          "event": "PDUFA",
+          "status": "PENDING"
+        },
+        {
+          "drug": "Sampletinib",
+          "indication": "Type 2 diabetes",
+          "date": "2025-11-01",
+          "event": "Approval",
+          "status": "APPROVED"
+        }
+      ]
+    }
+  }
+}

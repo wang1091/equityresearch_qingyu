@@ -1,0 +1,34 @@
+{
+  "dataSource": "PERFORMANCE",
+  "language": "en",
+  "_synthetic": "Hand-built — local performance service (:8502) not in this checkout. Shape mirrors fetchPerformanceData output { primaryTicker, peers, metrics, peerConclusion }.",
+  "apiData": {
+    "primaryTicker": "AAPL",
+    "peers": ["MSFT"],
+    "metrics": {
+      "AAPL": {
+        "Total Revenue": { "2025Q1": 124300000000, "2025Q2": 95400000000, "Current": 124300000000 },
+        "Gross Margin %": { "2025Q1": 46.9, "2025Q2": 46.6, "Current": 46.9 },
+        "Operating Expense": { "2025Q1": 15400000000, "2025Q2": 14300000000, "Current": 15400000000 },
+        "EBIT": { "2025Q1": 42800000000, "2025Q2": 28200000000, "Current": 42800000000 },
+        "Net Income": { "2025Q1": 36300000000, "2025Q2": 23600000000, "Current": 36300000000 },
+        "Free Cash Flow": { "2025Q1": 39100000000, "2025Q2": 24400000000, "Current": 39100000000 },
+        "Market Cap": { "Current": 3400000000000 },
+        "P/E Ratio": { "2025Q1": 32.6 }
+      },
+      "MSFT": {
+        "Total Revenue": { "2025Q1": 69600000000, "Current": 69600000000 },
+        "Gross Margin %": { "2025Q1": 69.4, "Current": 69.4 },
+        "Operating Expense": { "2025Q1": 16500000000, "Current": 16500000000 },
+        "EBIT": { "2025Q1": 31700000000, "Current": 31700000000 },
+        "Net Income": { "2025Q1": 24100000000, "Current": 24100000000 },
+        "Free Cash Flow": { "2025Q1": 20900000000, "Current": 20900000000 },
+        "Market Cap": { "Current": 3100000000000 }
+      }
+    },
+    "peerConclusion": {
+      "en": "AAPL leads on free cash flow generation while MSFT carries a higher gross margin profile.",
+      "period": "2025Q1"
+    }
+  }
+}

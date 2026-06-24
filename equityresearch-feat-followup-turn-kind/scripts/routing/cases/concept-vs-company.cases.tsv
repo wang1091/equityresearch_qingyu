@@ -1,0 +1,27 @@
+# LLM/settings: temperature 0, empty conversation history, run via classify-file.ts.
+#   default LOCAL qwen/qwen3.6-35b-a3b @ :1234 (max_tokens 1200, timeout 180s);
+#   DEEPSEEK=1 LOG_LEVEL=error → prod deepseek-chat (max_tokens 600, timeout 15s).
+# Layer B · category 5 — "target" as the price-target CONCEPT vs Target the company.
+# The most dangerous trap: a price target FOR another company must keep that
+# company and never become TGT. "target" as the subject of its own lens is TGT
+# (those positives live in common-word-ticker.cases.tsv).
+# Run: npx tsx scripts/routing/classify-file.ts scripts/routing/cases/concept-vs-company.cases.tsv
+
+# price target FOR another company → that company, NOT TGT  (folded from verify)
+target price for AMD	AMD,-TGT,=RATING
+AMD target price	AMD,-TGT,=RATING
+target price AMD	AMD,-TGT,=RATING
+what is the target price of Nvidia	NVDA,-TGT,=RATING
+analyst target for Nvidia	NVDA,-TGT,=RATING
+new target for Apple stock	AAPL,-TGT,=RATING
+Morgan Stanley cut Tesla target	TSLA,-TGT,=RATING
+
+# "target" as the company, with the price-target concept ON it → TGT
+price target for Target	TGT,=RATING
+Target target price	TGT,=RATING
+What is Target's price target?	TGT,=RATING
+
+# genuinely ambiguous / concept with no entity
+Target price today	?	TGT 股价 还是 目标价?
+Did Target raise its target?	?	需澄清
+lower target after earnings	-TGT	price-target concept, no entity

@@ -1,0 +1,32 @@
+# LLM/settings: temperature 0, empty conversation history, run via classify-file.ts.
+#   default LOCAL qwen/qwen3.6-35b-a3b @ :1234 (max_tokens 1200, timeout 180s);
+#   DEEPSEEK=1 LOG_LEVEL=error → prod deepseek-chat (max_tokens 600, timeout 15s).
+# Layer B · category 4 — resolve a spelled-out / common-word company name to its
+# ticker. These are NOT price-target traps; they test whether the model knows the
+# name→ticker mapping at all (DeepSeek gets some, misses others — see doc).
+# Run: npx tsx scripts/routing/classify-file.ts scripts/routing/cases/name-to-ticker.cases.tsv
+
+# common-word companies (positives) + their normal-word negatives
+discover stock	?	ambiguous: prod reads "discover [a] stock" → STOCK_PICKER screener (defensible); Discover=DFS resolves WITH context (see next two)
+discover card volume	DFS	prod ✓ [DFS] (DeepSeek RUNS=3); 35b→[COIN] WRONG (35b-only)
+Discover Financial earnings	DFS	prod ✓ [DFS]; explicit-name anchor
+discover new stocks	-DFS
+progressive earnings	PGR
+progressive tax policy	-PGR
+travelers stock	TRV
+travelers insurance earnings	TRV
+principal stock	PFG	prod ✓ [PFG] (DeepSeek RUNS=3); 35b→GENERAL (35b-only)
+principal amount of debt	none
+carrier earnings	CARR
+monster revenue	MNST
+celsius stock	CELH
+
+# spelled-out names / dual-class
+Alphabet stock	GOOGL|GOOG
+Google stock	GOOGL|GOOG
+GOOGL earnings	GOOGL,=EARNINGS
+$GOOG news	GOOGL|GOOG	GOOG↔GOOGL both fine
+
+# renamed / private — informational
+Twitter stock	?	former TWTR, now private X
+X advertising revenue	?	private company, not listed

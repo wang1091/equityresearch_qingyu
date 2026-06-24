@@ -1,0 +1,8 @@
+{
+  "dataSource": "TRENDING",
+  "language": "en",
+  "apiData": {
+    "success": false,
+    "error": "Trending stocks unavailable"
+  }
+}

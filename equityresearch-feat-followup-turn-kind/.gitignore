@@ -1,0 +1,46 @@
+node_modules
+dist
+.DS_Store
+server/public
+vite.config.ts.*
+*.tar.gz
+.history/
+.tags
+.vscode/
+GPATH
+GTAGS
+GRTAGS
+PLAN.md
+*.temp
+*.lock
+.codex
+.claude/settings.local.json
+.claude/projects/
+.history/
+.local/
+.vscode/
+docs/
+
+# Secrets and machine-local env. The app reads a single .env (server/index.ts);
+# it is per-machine + ignored. Copy .env.example -> .env. deploy.sh backs the
+# live .env up on EC2 before reset. Legacy layered files stay ignored too.
+.env
+.env.*
+!.env.example
+python-services/*/.env
+
+# Runtime log files written by observability/logSystem.ts
+logs/
+python-services/**/.api_cache/
+python-services/**/__pycache__/
+python-services/**/*.pyc
+
+# competitive-analysis regression suite output (scripts/competitive-suite.mts)
+scripts/results/
+scripts/baselines/*.local.*
+
+# Playwright UI E2E (npm run test:ui) — reports, traces, and captured screenshots.
+# Browser binaries live in ~/.cache/ms-playwright (outside the repo).
+playwright-report/
+test-results/
+e2e/__screenshots__/

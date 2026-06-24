@@ -1,0 +1,47 @@
+{
+  "dataSource": "MARKET_DATA",
+  "language": "zh",
+  "apiData": {
+    "success": true,
+    "tickers": [
+      "TSLA"
+    ],
+    "queryType": "market_cap",
+    "quotes": [
+      {
+        "ticker": "TSLA",
+        "price": 404.66,
+        "change": -6.49,
+        "changePercent": -1.5785,
+        "previousClose": 411.15,
+        "open": 404.11,
+        "dayHigh": 412.42,
+        "dayLow": 400.54,
+        "volume": 39115083,
+        "marketCap": 1519789655200,
+        "sharesOutstanding": null,
+        "pe": null,
+        "ps": null,
+        "evEbitda": 125.33485167813045,
+        "eps": null,
+        "dividendYield": null,
+        "beta": 1.798,
+        "fiftyTwoWeekHigh": 498.83,
+        "fiftyTwoWeekLow": 288.77,
+        "ytdReturn": -7.626635012669201,
+        "companyName": "Tesla, Inc.",
+        "sector": "Consumer Cyclical",
+        "currency": "USD",
+        "exchange": "NASDAQ",
+        "provider": "fmp"
+      }
+    ],
+    "calculated": {
+      "ytdReturnPct": "-7.63%",
+      "marketCapFmt": "$1.52T",
+      "evEbitdaFmt": "125.3x"
+    },
+    "provider": "fmp",
+    "fetchedAt": "2026-06-17T01:53:19.301Z"
+  }
+}

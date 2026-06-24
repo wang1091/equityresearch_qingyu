@@ -1,0 +1,38 @@
+# LLM/settings: temperature 0, empty conversation history, run via classify-file.ts.
+#   default LOCAL qwen/qwen3.6-35b-a3b @ :1234 (max_tokens 1200, timeout 180s);
+#   DEEPSEEK=1 LOG_LEVEL=error → prod deepseek-chat (max_tokens 600, timeout 15s).
+# Layer B · category 6 — data vendor vs public company. FactSet (FDS) and
+# Morningstar (MORN) are both listed companies AND data/rating vendors. A query
+# ABOUT the vendor's stock → ticker; using the vendor as a data source for
+# another company → that other company (or no ticker), NOT the vendor.
+# Run: npx tsx scripts/routing/classify-file.ts scripts/routing/cases/vendor-vs-company.cases.tsv
+
+# FactSet / FDS — the company. REAL PROD GAP: DeepSeek (RUNS=3, stable) reads
+# "FactSet" as the data VENDOR and abstains → GENERAL for stock/earnings/revenue.
+# Pending a SUBJECT-ANCHORED FactSet→FDS alias (map only when FactSet is the lens
+# subject; keep "FactSet consensus data" / "use FactSet estimates" as vendor → no FDS).
+FactSet stock	FDS	REAL PROD GAP: prod→GENERAL (vendor read)
+FactSet earnings	FDS,=EARNINGS	REAL PROD GAP: prod→GENERAL (vendor read); 35b→[FDX]=FedEx. pending subject-anchored fix
+FDS stock price	FDS,=STOCK_PRICE
+$FDS earnings	FDS,=EARNINGS
+FactSet revenue growth	FDS,=PERFORMANCE	REAL PROD GAP: prod→GENERAL (vendor read); pending subject-anchored fix
+# FactSet as vendor / ordinary phrase
+FactSet consensus data	?	vendor/source, maybe not FDS stock
+FactSet vs Bloomberg	?	vendor comparison
+fact set for this case	none
+create a factset for attribution	none	项目术语，不是 FDS
+
+# Morningstar / MORN — the company. REAL PROD GAP (phrasing-dependent): DeepSeek
+# (RUNS=3) → GENERAL for "Morningstar stock"/"earnings" but ✓ MORN for "revenue
+# growth". Pending a SUBJECT-ANCHORED Morningstar→MORN alias (keep "Morningstar
+# rating for X" / "fair value" as rating-vendor → no MORN).
+Morningstar stock	MORN	REAL PROD GAP: prod→GENERAL (vendor read)
+Morningstar earnings	MORN,=EARNINGS	REAL PROD GAP: prod→GENERAL; pending subject-anchored fix
+MORN stock price	MORN,=STOCK_PRICE
+Morningstar revenue growth	MORN,=PERFORMANCE	prod ✓ [MORN] (inconsistent across phrasings)
+# Morningstar as rating vendor / candlestick homograph
+Morningstar rating for AMD	AMD,-MORN	rating-source for AMD, not MORN
+Morningstar fair value	-MORN	vendor methodology
+Morningstar vs FactSet	?	vendor comparison
+morning star pattern	none	candlestick, not MORN
+morning star candlestick	none

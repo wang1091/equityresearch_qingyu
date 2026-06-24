@@ -1,0 +1,76 @@
+{
+  "dataSource": "RATING",
+  "language": "en",
+  "apiData": {
+    "success": true,
+    "ticker": "TSLA",
+    "price": 404.66,
+    "target": null,
+    "upside": null,
+    "rating": "HOLD",
+    "provider": "Argus Research",
+    "technical": {
+      "short": {
+        "direction": "Bearish",
+        "score": 1,
+        "desc": "Weak Bearish Evidence"
+      },
+      "mid": {
+        "direction": "Bullish",
+        "score": 3,
+        "desc": "Strong Bullish Evidence"
+      },
+      "long": {
+        "direction": "Bullish",
+        "score": 1,
+        "desc": "Weak Bullish Evidence"
+      },
+      "vsSector": "Bullish",
+      "vsIndex": "Bullish"
+    },
+    "levels": {
+      "support": 394.36,
+      "resistance": 436.15,
+      "stopLoss": 362.43
+    },
+    "valuation": {
+      "status": "Overvalued",
+      "discount": "-1%"
+    },
+    "scores": {
+      "innovativeness": 0.9412,
+      "hiring": 0.7917000000000001,
+      "sustainability": 0.4371,
+      "insiderSentiments": 0.9967,
+      "earningsReports": 0.9925,
+      "dividends": null
+    },
+    "bullish": [
+      "Tesla has the potential to disrupt multiple industries with its technology for EVs, AVs, batteries, and humanoid robots.",
+      "Tesla's full self-driving software should generate growing profits in the coming years as the technology continues to improve, leading to a robotaxi service and increased adoption by Tesla drivers.",
+      "Tesla's humanoid robot will create shareholder value as its ability to perform multiple functions will transform manufacturing and be useful to consumers."
+    ],
+    "bearish": [
+      "Traditional automakers and new entrants are investing heavily in EV development, which will result in declining deliveries. This will force Tesla to cut prices due to increased competition, eroding profit margins.",
+      "Tesla's large investment in autonomous driving software will be value-destructive as the robotaxi product will face delays and competition from Waymo, which already offers a robotaxi service.",
+      "Tesla CEO Elon Musk's political activities will turn consumers away from buying a Tesla in key markets including the US and Europe, leading to lower sales and profits."
+    ],
+    "news": {
+      "headline": "Tesla Pushes Roadster Demo To August - The Information",
+      "date": "2026-06-05"
+    },
+    "reports": [
+      {
+        "title": "Analyst Report: Tesla Inc",
+        "provider": "Argus Research",
+        "date": "2026-04-24T10:41:06Z"
+      },
+      {
+        "title": "Market Digest: AXP, DHR, HAS, ROL, TXN, MSCI, TSLA, NOW",
+        "provider": "Argus Research",
+        "date": "2026-04-24T10:41:06Z"
+      }
+    ],
+    "sector": "Consumer Cyclical"
+  }
+}

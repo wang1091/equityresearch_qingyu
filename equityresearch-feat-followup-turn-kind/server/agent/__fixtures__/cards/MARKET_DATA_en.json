@@ -1,0 +1,47 @@
+{
+  "dataSource": "MARKET_DATA",
+  "language": "en",
+  "apiData": {
+    "success": true,
+    "tickers": [
+      "NVDA"
+    ],
+    "queryType": "market_cap",
+    "quotes": [
+      {
+        "ticker": "NVDA",
+        "price": 207.41,
+        "change": -5.04,
+        "changePercent": -2.37232,
+        "previousClose": 212.45,
+        "open": 211.115,
+        "dayHigh": 211.49,
+        "dayLow": 207.34,
+        "volume": 125087034,
+        "marketCap": 5023677610000,
+        "sharesOutstanding": null,
+        "pe": null,
+        "ps": null,
+        "evEbitda": 26.059090960967815,
+        "eps": null,
+        "dividendYield": null,
+        "beta": 2.202,
+        "fiftyTwoWeekHigh": 236.54,
+        "fiftyTwoWeekLow": 142.03,
+        "ytdReturn": 9.827905745300503,
+        "companyName": "NVIDIA Corporation",
+        "sector": "Technology",
+        "currency": "USD",
+        "exchange": "NASDAQ",
+        "provider": "fmp"
+      }
+    ],
+    "calculated": {
+      "ytdReturnPct": "+9.83%",
+      "marketCapFmt": "$5.02T",
+      "evEbitdaFmt": "26.1x"
+    },
+    "provider": "fmp",
+    "fetchedAt": "2026-06-17T01:53:16.750Z"
+  }
+}

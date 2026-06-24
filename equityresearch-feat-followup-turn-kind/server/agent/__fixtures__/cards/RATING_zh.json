@@ -1,0 +1,76 @@
+{
+  "dataSource": "RATING",
+  "language": "zh",
+  "apiData": {
+    "success": true,
+    "ticker": "AAPL",
+    "price": 299.24,
+    "target": null,
+    "upside": null,
+    "rating": "BUY",
+    "provider": "Argus Research",
+    "technical": {
+      "short": {
+        "direction": "Bearish",
+        "score": 3,
+        "desc": "Strong Bearish Evidence"
+      },
+      "mid": {
+        "direction": "Bullish",
+        "score": 2,
+        "desc": "Bullish Evidence"
+      },
+      "long": {
+        "direction": "Bullish",
+        "score": 1,
+        "desc": "Weak Bullish Evidence"
+      },
+      "vsSector": "Bearish",
+      "vsIndex": "Bullish"
+    },
+    "levels": {
+      "support": 226.64,
+      "resistance": 300.92,
+      "stopLoss": 269.6
+    },
+    "valuation": {
+      "status": "Overvalued",
+      "discount": "-6%"
+    },
+    "scores": {
+      "innovativeness": 0.9981,
+      "hiring": 0.9512999999999999,
+      "sustainability": 0.16519999999999999,
+      "insiderSentiments": 0.3378,
+      "earningsReports": 0.8387,
+      "dividends": 0.0762
+    },
+    "bullish": [
+      "Apple offers an expansive ecosystem of tightly integrated hardware, software, and services, which locks in customers and generates strong profitability.",
+      "We like Apple’s move to in-house chip development, which we think has accelerated its product development and increased its differentiation. ",
+      "Apple has a stellar balance sheet and sends great amounts of cash flow back to shareholders."
+    ],
+    "bearish": [
+      "Apple is prone to consumer spending and preferences, which creates cyclicality and opens the firm up to disruption.",
+      "Apple’s supply chain is highly concentrated in China and Taiwan, which opens up the firm to geopolitical risk. Attempts to diversify into other regions may pressure profitability or efficiency.",
+      "Regulators have a keen eye on Apple, and recent regulations have chipped away at parts of Apple’s sticky ecosystem. "
+    ],
+    "news": {
+      "headline": "Apple Exec, On New Apple Intelligence Features, Says We Do Not Use Google Search As The Basis Of Our System",
+      "date": "2026-06-08"
+    },
+    "reports": [
+      {
+        "title": "Technical Assessment: Bullish in the Intermediate-Term",
+        "provider": "Argus Research",
+        "date": "2026-06-11T11:35:42Z"
+      },
+      {
+        "title": "Analyst Report: Apple Inc",
+        "provider": "Argus Research",
+        "date": "2026-06-09T17:41:15Z"
+      }
+    ],
+    "sector": "Technology"
+  }
+}
